@@ -34,19 +34,15 @@ def decrypt(nonce, ciphertext, tag, key):
 
 # Encryptie aanroepen
 nonce, ciphertext, tag, key = encrypt(input("Enter a message: "))
-#plaintext = decrypt(nonce, ciphertext, tag)
 print(f'Key: {key.hex()}')
 print(f'Ciphertext: {ciphertext}')
-#if not plaintext:
-    #print('Something went wrong.')
-#else:
-    #print(f'Plain text: {plaintext}')
+
 
 # Decryptie aanroepen
 user_key = bytes.fromhex(input("Enter the key in hex format: "))
 plaintext = decrypt(nonce, ciphertext, tag, user_key)
-#plaintext = decrypt(input("Enter a key: "))
+
 if not plaintext:
-    print('Something went wrong.')
+    print('Key incorrect or message corrupted.')
 else:
-    print(f'Plain text: {plaintext}')
+    print(f'Verified message: {plaintext}')
