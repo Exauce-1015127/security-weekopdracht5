@@ -20,7 +20,7 @@
 <div class="section">
     <h2>Bericht Versleutelen</h2>
     <form method="post">
-        <textarea name="message" placeholder="Typ hier je bericht..."></textarea><br><br>
+        <textarea name="message" placeholder="Typ hier je bericht..." required minlength="1"></textarea><br><br>
         <button type="submit" name="encrypt">Versleutel bericht</button>
     </form>
     {% if key_hex %}
