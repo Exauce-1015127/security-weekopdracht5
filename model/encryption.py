@@ -2,7 +2,7 @@ from Crypto.Cipher import AES
 from secrets import token_bytes
 
 # Lengte geven aan de key
-key = token_bytes(16)
+key = token_bytes(32)
 
 def encrypt(plaintext):
 
