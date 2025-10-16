@@ -24,10 +24,11 @@
     </form>
     {% if key_hex %}
         <h3>Gekregen Key (kopieer en bewaar):</h3>
-        <input type="text" value="{{ key_hex }}" id="keyField" readonly>
-        <button onclick="copyToClipboard()">Kopieer naar klembord</button>
+
+
         <div class="output">
             <h4>Versleuteld bericht:</h4>
+            <p>Key: {{ key_hex }}</p>
             <p>Nonce: {{ encrypted_data.nonce }}</p>
             <p>Ciphertext: {{ encrypted_data.ciphertext }}</p>
             <p>Tag: {{ encrypted_data.tag }}</p>
@@ -64,7 +65,7 @@ function copyToClipboard() {
     alert("Key gekopieerd naar klembord");
 }
 function downloadData() {
-    const key = document.getElementById("keyField").value;
+    const key = "{{ key_hex }}";
     const nonce = "{{ encrypted_data.nonce }}";
     const ciphertext = "{{ encrypted_data.ciphertext }}";
     const tag = "{{ encrypted_data.tag }}";
