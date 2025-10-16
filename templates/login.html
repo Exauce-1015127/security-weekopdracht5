@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+    <meta name="description" content="Log in op het portaal om toegang te krijgen tot de applicatie" />
+    <meta name="theme-color" content="#041f74" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="{{ url_for('static', filename='css/variables.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/loginregistratie.css') }}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="container-fluid vh-100 d-flex align-items-center justify-content-center">
+      <div class="login-container p-4 rounded shadow position-relative" aria-labelledby="login-heading">
+
+        <h1 id="login-heading" class="text-center">Log in</h1>
+
+        <div class="tab-content" id="loginTabsContent">
+          <div class="tab-pane fade show active" id="user-login" role="tabpanel" aria-labelledby="user-tab">
+            <form id="login-form">
+              <div class="mb-3">
+                <label for="username" class="form-label">Gebruikersnaam <span class="visually-hidden">(verplicht veld)</span></label>
+                <input name="username" type=text class="form-control" id="username" required aria-required="true" aria-describedby="username-help"/>
+                <small id="username-help" class="form-text text-muted">Vul uw gebruikersnaam in.</small>
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="form-label">Wachtwoord <span class="visually-hidden">(verplicht veld)</span></label>
+                <input name="password" type="password" class="form-control" id="password" required aria-required="true" aria-describedby="password-help"/>
+                <small id="password-help" class="form-text text-muted">Vul uw wachtwoord in.</small>
+              </div>
+              <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input" id="showPassword" aria-label="Toon wachtwoord"/>
+                <label class="form-check-label" for="showPassword">Toon wachtwoord</label>
+              </div>
+
+              <button class="btn main-btn w-100" type="submit" aria-label="Log in op het klantportaal">Log in</button>
+              <button class="sign-up-btn" type="button" aria-label="Registreer voor het klantportaal" onclick="window.location.href='registratie'">Aanmelden</button>
+            </form>
+          </div>
+        </div>
+
+        <hr />
+
+        <!-- Wachtwoord vergeten -->
+        <div class="text-center mt-3">
+          <p>Wachtwoord vergeten? Neem dan contact op met uw admin.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

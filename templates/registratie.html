@@ -1,0 +1,258 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registratie | Klantportaal</title>
+
+    <!-- Toegankelijkheidsmeta -->
+    <meta name="description" content="Registreer als gebruiker of organisatie voor toegang tot het klantportaal." />
+    <meta name="theme-color" content="#041f74" />
+
+    <!-- Google Fonts: Mulish -->
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static', filename='css/variables.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/loginregistratie.css') }}" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div class="logo-container position-absolute">
+      <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Logo Accessibility, onderdeel van Bartimeus">
+    </div>
+
+    <div class="container-fluid vh-100 d-flex align-items-center justify-content-center">
+      <div class="login-container p-4 rounded shadow position-relative">
+
+        <!-- Tabs -->
+        <ul class="nav nav-tabs mb-3" id="registratieTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="gebruiker-tab" data-bs-toggle="tab" data-bs-target="#gebruiker" type="button" role="tab">Gebruiker</button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="registratieTabContent">
+            <!-- Gebruiker Registratie -->
+            <div class="tab-pane fade show active" id="gebruiker" role="tabpanel">
+              <h3 class="text-center">Registreer als Gebruiker</h3>
+              <hr />
+
+              <form id="register-form" action="{{ url_for('register_user') }}" method="POST">
+                <fieldset>
+                  <legend>Persoonlijke Gegevens</legend>
+                  <label for="first_name">Voornaam</label>
+                  <input id="first_name" name="first_name" type="text" class="form-control mb-2" placeholder="Uw voornaam" required>
+
+                  <label for="last_name">Achternaam</label>
+                  <input id="last_name" name="last_name" type="text" class="form-control mb-2" placeholder="Uw achternaam" required>
+
+                  <label for="postal_code">Postcode</label>
+                  <input id="postal_code" name="postal_code" type="text" class="form-control mb-2" placeholder="Uw postcode" required>
+
+                  <label for="gender">Geslacht</label>
+                  <select id="gender" name="gender" class="form-control mb-2" required>
+                    <option value="man">Man</option>
+                    <option value="vrouw">Vrouw</option>
+                    <option value="ander">Ander</option>
+                  </select>
+
+                  <label for="birth_date">Geboortedatum</label>
+                  <input id="birth_date" name="birth_date" type="date" class="form-control mb-2" required>
+
+                  <label for="email">E-mailadres</label>
+                  <input id="email" name="email" type="email" class="form-control mb-2" placeholder="voorbeeld@email.com" required>
+
+                  <label for="phone_number">Telefoonnummer</label>
+                  <input id="phone_number" name="phone_number" type="text" class="form-control mb-2" placeholder="Uw telefoonnummer">
+                </fieldset>
+
+                <fieldset>
+                  <legend>Accountgegevens</legend>
+                  <label for="password">Wachtwoord</label><input id="password" name="password" type="password" class="form-control mb-2" placeholder="Minimaal 8 tekens, een letter, cijfer en speciaal teken" required><p id="password-error" style="color:red; display:none;">Het wachtwoord moet minimaal 8 tekens lang zijn en ten minste één letter, één cijfer en één speciaal teken bevatten.</p>
+
+                  <label for="tools_used">Gebruikte tools</label>
+                  <input id="tools_used" name="tools_used" type="text" class="form-control mb-2" placeholder="Tools die u gebruikt" required>
+
+                  <label for="short_bio">Korte bio</label>
+                  <textarea id="short_bio" name="short_bio" class="form-control mb-2" placeholder="Korte beschrijving van uzelf" rows="4" required></textarea>
+
+                  <label for="special_notes">Speciale opmerkingen</label>
+                  <textarea id="special_notes" name="special_notes" class="form-control mb-2" placeholder="Speciale opmerkingen" rows="4"></textarea>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Kies uw beperking</legend>
+
+                    <div class="container mt-4">
+                        <p class="d-inline-flex gap-1">
+                          <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Auditieve beperkingen</a>
+                        </p>
+                        <div class="row">
+                          <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                              <div class="card card-body">
+                                <input type="checkbox" id="beperkingdoof" name="beperkingnaam" value="Doof">
+                                <label for="beperkingdoof"> Doof</label><br>
+                                <input type="checkbox" id="beperkingslechthorend" name="beperkingnaam" value="Slechthorend">
+                                <label for="beperkingslechthorend"> Slechthorend</label><br>
+                                <input type="checkbox" id="beperkingdoofblind" name="beperkingnaam" value="Doofblind">
+                                <label for="beperkingdoofblind"> Doofblind</label><br><br>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <p class="d-inline-flex gap-1">
+                          <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample2" role="button" aria-expanded="false" aria-controls="multiCollapseExample2">Visuele beperkingen</a>
+                        </p>
+                        <div class="row">
+                          <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample2">
+                              <div class="card card-body">
+                                <input type="checkbox" id="beperkingblind" name="beperkingnaam" value="Blind">
+                                <label for="beperkingblind"> Blind</label><br>
+                                <input type="checkbox" id="beperkingslechtziend" name="beperkingnaam" value="Slechtziend">
+                                <label for="beperkingslechtziend"> Slechtziend</label><br>
+                                <input type="checkbox" id="beperkingkleurenblind" name="beperkingnaam" value="Kleurenblind">
+                                <label for="beperkingkleurenblind"> Kleurenblind</label><br><br>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <p class="d-inline-flex gap-1">
+                          <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample3" role="button" aria-expanded="false" aria-controls="multiCollapseExample3">Lichamelijke beperkingen</a>
+                        </p>
+                        <div class="row">
+                          <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample3">
+                              <div class="card card-body">
+                                <input type="checkbox" id="beperkingamputatie" name="beperkingnaam" value="Amputatie">
+                                    <label for="beperkingamputatie"> Amputatie en mismaaktheid</label><br>
+                                    <input type="checkbox" id="beperkingartritus" name="beperkingnaam" value="Artritus">
+                                    <label for="beperkingartritus"> Artritus</label><br>
+                                    <input type="checkbox" id="beperkingfybromyalgie" name="beperkingnaam" value="Fybromyalgie">
+                                    <label for="beperkingfybromyalgie"> Fybromyalgie</label><br>
+                                    <input type="checkbox" id="beperkingreuma" name="beperkingnaam" value="Reuma">
+                                    <label for="beperkingreuma"> Reuma</label><br>
+                                    <input type="checkbox" id="beperkinghandvaardigheid" name="beperkingnaam" value="Handvaardigheid">
+                                    <label for="beperkinghandvaardigheid"> Verminderde handvaardigheid</label><br>
+                                    <input type="checkbox" id="beperkingspierdystrofie" name="beperkingnaam" value="Spierdystrofie">
+                                    <label for="beperkingspierdystrofie"> Spierdystrofie</label><br>
+                                    <input type="checkbox" id="beperkingrsi" name="beperkingnaam" value="RSI">
+                                    <label for="beperkingrsi"> RSI</label><br>
+                                    <input type="checkbox" id="beperkingtremor" name="beperkingnaam" value="Tremor">
+                                    <label for="beperkingtremor"> Tremor en spasmen</label><br>
+                                    <input type="checkbox" id="beperkingquadriplegie" name="beperkingnaam" value="Quadriplegie">
+                                    <label for="beperkingquadriplegie"> Quadriplegie of tetraplegie</label><br><br>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                         <p class="d-inline-flex gap-1">
+                          <a class="btn btn-primary" data-bs-toggle="collapse" href="#multiCollapseExample4" role="button" aria-expanded="false" aria-controls="multiCollapseExample4">Cognitieve beperkingen</a>
+                        </p>
+                        <div class="row">
+                          <div class="col">
+                            <div class="collapse multi-collapse" id="multiCollapseExample4">
+                              <div class="card card-body">
+                                <input type="checkbox" id="beperkingamputatie2" name="beperkingnaam" value="Amputatie">
+                                  <label for="beperkingamputatie2">Amputatie</label><br>
+                                    <input type="checkbox" id="beperkingadhd" name="beperkingnaam" value="ADHD">
+                                        <label for="beperkingadhd"> ADHD</label><br>
+                                        <input type="checkbox" id="beperkingautisme" name="beperkingnaam" value="Autisme">
+                                        <label for="beperkingautisme"> Autisme</label><br>
+                                        <input type="checkbox" id="beperkingdyslexie" name="beperkingnaam" value="Dyslexie">
+                                        <label for="beperkingdyslexie"> Dyslexie</label><br>
+                                        <input type="checkbox" id="beperkingdyscalculie" name="beperkingnaam" value="Dyscalculie">
+                                        <label for="beperkingdyscalculie"> Dyscalculie</label><br>
+                                        <input type="checkbox" id="beperkingleerstoornis" name="beperkingnaam" value="Leerstoornis">
+                                        <label for="beperkingleerstoornis"> Leerstoornis</label><br>
+                                        <input type="checkbox" id="beperkinggeheugen" name="beperkingnaam" value="Geheugenbeperking">
+                                        <label for="beperkinggeheugen"> Geheugenbeperking</label><br>
+                                        <input type="checkbox" id="beperkingsclerose" name="beperkingnaam" value="Sclerose">
+                                        <label for="beperkingsclerose"> Multiple Sclerose</label><br>
+                                        <input type="checkbox" id="beperkingepilepsie" name="beperkingnaam" value="Epilepsie">
+                                        <label for="beperkingepilepsie"> Epilepsie</label><br>
+                                        <input type="checkbox" id="beperkingmigraine" name="beperkingnaam" value="Migraine">
+                                        <label for="beperkingmigraine"> Migraine</label><br><br>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+
+                </fieldset>
+
+                <fieldset>
+                  <legend>Overige Informatie</legend>
+                    <label for="is_supervisor">Heeft u een voogd?</label>
+                    <div class="form-check">
+                      <input id="is_supervisor" name="is_supervisor" type="radio" class="form-check-input mb-2" value="true" required>
+                      <label for="is_supervisor" class="form-check-label">Ja</label>
+                    </div>
+                    <div class="form-check">
+                      <input id="is_not_supervisor" name="is_supervisor" type="radio" class="form-check-input mb-2" value="false">
+                      <label for="is_not_supervisor" class="form-check-label">Nee</label>
+                    </div>
+
+
+{#                  <label for="is_supervisor">Bent u een supervisor?</label>#}
+{#                  <input id="is_supervisor" name="is_supervisor" type="checkbox" class="mb-2" value="true"> Ja#}
+{#                    <input id="is_not_supervisor" name="is_not_supervisor" type="checkbox" class="mb-2" value="false"> Nee#}
+                  <label for="supervisor_or_guardian_name">naam voogd</label>
+                  <input id="supervisor_or_guardian_name" name="supervisor_or_guardian_name" type="text" class="form-control mb-2" placeholder="Naam van voogd">
+
+                  <label for="availability_notes">Beschikbaarheid opmerkingen</label>
+                  <textarea id="availability_notes" name="availability_notes" class="form-control mb-2" placeholder="Uw beschikbaarheid" rows="4"></textarea>
+
+                  <label for="contact_preference">Contact voorkeur</label>
+                  <select id="contact_preference" name="contact_preference" class="form-control mb-2" required>
+                    <option value="Email">Email</option>
+                    <option value="Telefoon">Telefoon</option>
+                    <!-- Voeg hier meer opties toe als dat nodig is -->
+                  </select>
+
+{#                  <label for="accepted_terms">Accepteer voorwaarden</label>#}
+{#                  <input id="accepted_terms" name="accepted_terms" type="checkbox" class="mb-2" value="true" required> Ik accepteer de voorwaarden#}
+                <div class="checkbox-group">
+                    <input id="accepted_terms" name="accepted_terms" type="checkbox" value="true" required>
+                    <label for="accepted_terms">
+                        Ik accepteer de
+                        <a class="pdf-download-btn" href="{{ url_for('docs', filename='voorwaarden/accessibilitynl_voorwaarden_gegevens-01012025.pdf') }}" download>
+                            voorwaarden
+                        </a>
+                    </label>
+                </div>
+
+                </fieldset>
+
+
+                <button class="btn main-btn w-100" type="submit">Registreren</button>
+                  <button class="btn main-btn w-100" type="button" onclick="window.location.href='/'"> Terug naar Login</button>
+              </form>
+            </div>
+
+        </div>
+
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('.static', filename='js/registreren.js') }}"></script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
