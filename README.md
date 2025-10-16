@@ -40,3 +40,11 @@ De keys blijven geheim doordat het pas wordt gegenereerd en getoond aan de gebru
 Nadat de gebruiker deze keys heeft gekopieerd of gedownload, worden ze niet opgeslagen in de applicatie.
 Zelfs als een aanvaller het algoritme en de werking van de applicatie kent, 
 kan hij geen toegang krijgen tot de versleutelde berichten zonder de juiste sleutel.
+
+
+# Installatie
+```bash
+git clone https://github.com/Exauce-1015127/security-weekopdracht5.git
+cd Weekopdracht 5
+pip install -r requirements.txt
+python main.py
