@@ -1,0 +1,14 @@
+# Python cache en tijdelijke bestanden
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtuele omgeving
+venv/
+env/
+
+
+# VSCode/PyCharm projectbestanden
+.vscode/
+.idea/
