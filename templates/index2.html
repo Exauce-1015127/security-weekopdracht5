@@ -32,6 +32,7 @@
             <p>Ciphertext: {{ encrypted_data.ciphertext }}</p>
             <p>Tag: {{ encrypted_data.tag }}</p>
         </div>
+        <button onclick="downloadData()">Download alle gegevens</button>
     {% endif %}
 </div>
 
@@ -61,6 +62,35 @@ function copyToClipboard() {
     copyText.setSelectionRange(0, 99999); // For mobile devices
     document.execCommand("copy");
     alert("Key gekopieerd naar klembord");
+}
+function downloadData() {
+    const key = document.getElementById("keyField").value;
+    const nonce = "{{ encrypted_data.nonce }}";
+    const ciphertext = "{{ encrypted_data.ciphertext }}";
+    const tag = "{{ encrypted_data.tag }}";
+
+    fetch('/download', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            'key': key,
+            'nonce': nonce,
+            'ciphertext': ciphertext,
+            'tag': tag
+        })
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'encrypted_data.json';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+    });
 }
 </script>
 

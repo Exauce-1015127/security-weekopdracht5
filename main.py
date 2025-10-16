@@ -1,9 +1,11 @@
-from flask import Flask, jsonify, request, abort, url_for, redirect, render_template, flash, session
+from flask import Flask, jsonify, request, abort, url_for, redirect, render_template, flash, session, send_file
 from model.encryption import encrypt, decrypt
 from model.login_module import login_user
 from model.registratie_module import register_user
 import sqlite3
 import base64
+import json
+import io
 
 app = Flask(__name__)
 app.secret_key = 'friesland'
@@ -103,6 +105,17 @@ def index2():
                 decrypted_message = "Decryption mislukt. Controleer de invoer."
 
     return render_template('index2.html', encrypted_data=encrypted_data, key_hex=key_hex, decrypted_message=decrypted_message)
+
+@app.route('/download', methods=['POST'])
+def download_data():
+    data = request.form.to_dict()
+    # Data bevat key, nonce, ciphertext, tag
+    json_data = json.dumps(data)
+    # Maak een in-memory bestand
+    buffer = io.BytesIO()
+    buffer.write(json_data.encode('utf-8'))
+    buffer.seek(0)
+    return send_file(buffer, as_attachment=True, download_name='encrypted_data.json', mimetype='application/json')
 
 if __name__ == '__main__':
     app.run(debug=True)
