@@ -33,16 +33,16 @@ def decrypt(nonce, ciphertext, tag, key):
         return False
 
 # Encryptie aanroepen
-nonce, ciphertext, tag, key = encrypt(input("Enter a message: "))
-print(f'Key: {key.hex()}')
-print(f'Ciphertext: {ciphertext}')
+#nonce, ciphertext, tag, key = encrypt(input("Enter a message: "))
+#print(f'Key: {key.hex()}')
+#print(f'Ciphertext: {ciphertext}')
 
 
 # Decryptie aanroepen
-user_key = bytes.fromhex(input("Enter the key in hex format: "))
-plaintext = decrypt(nonce, ciphertext, tag, user_key)
+#user_key = bytes.fromhex(input("Enter the key in hex format: "))
+#plaintext = decrypt(nonce, ciphertext, tag, user_key)
 
-if not plaintext:
-    print('Key incorrect or message corrupted.')
-else:
-    print(f'Verified message: {plaintext}')
+#if not plaintext:
+    #print('Key incorrect or message corrupted.')
+#else:
+    #print(f'Verified message: {plaintext}')
