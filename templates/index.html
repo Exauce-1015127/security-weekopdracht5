@@ -58,13 +58,6 @@
 </div>
 
 <script>
-function copyToClipboard() {
-    var copyText = document.getElementById("keyField");
-    copyText.select();
-    copyText.setSelectionRange(0, 99999); // For mobile devices
-    document.execCommand("copy");
-    alert("Key gekopieerd naar klembord");
-}
 function downloadData() {
     const key = "{{ key_hex }}";
     const nonce = "{{ encrypted_data.nonce }}";
